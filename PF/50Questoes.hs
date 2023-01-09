@@ -9,7 +9,7 @@ import Data.List
 import System.IO
 import Data.Char
 import Data.Either
-
+ 
 
 --Ex1
 enumFromTo1 :: Int -> Int -> [Int]

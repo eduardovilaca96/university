@@ -29,7 +29,7 @@ geraconj (x:y:ys) = [(x,y)] ++ geraconj ys
 geraconj _ = []
 
 --3
-data Contacto = Casa Integer | Trab Integer | Tlm Integer | Email String deriving (Show)
+data Contacto = Casa Integer | Trab Integer | Tlm Integer | Email String deriving (Show,Eq)
 type Nome = String
 type Agenda = [(Nome, [Contacto])]
 
@@ -71,15 +71,15 @@ verEmails2 _ [] = []
 verEmails2 nome ((x,l):xs) | nome == x = selectEmails l  
                            | otherwise = verEmails2 nome xs
 
-verNumeros :: Nome -> Agenda -> [Integer]
+verNumeros :: Nome -> Agenda -> [Contacto]
 verNumeros _ [] = []
 verNumeros nome ((x,l):xs) | nome == x = selectNum l  
                            | otherwise = verNumeros nome xs
 
-selectNum :: [Contacto] -> [Integer]
-selectNum ((Casa t):ys) = [t] ++ selectNum ys
-selectNum ((Tlm t):ys)  = [t] ++ selectNum ys
-selectNum ((Trab t):ys) = [t] ++ selectNum ys
+selectNum :: [Contacto] -> [Contacto]
+selectNum ((Casa t):ys) = [(Casa t)] ++ selectNum ys
+selectNum ((Tlm t):ys)  = [(Tlm t)] ++ selectNum ys
+selectNum ((Trab t):ys) = [(Trab t)] ++ selectNum ys
 selectNum ((Email t):ys) = selectNum ys
 selectNum _ = []
 
@@ -90,10 +90,18 @@ consultaIO l =
             putStrLn "Nome do Contacto:"
             nome <- getLine
             let name = read nome :: String
-            print "Email:"
-            print (verEmails2 nome l)
-            print "Casa/Tlm/Trab:"
-            print (verNumeros nome l)
+            let emails = (verEmails2 nome l)
+            let numeros = (verNumeros nome l)
+           
+            if (emails == []) 
+                then print ("Nao existem emails associados a " ++ nome)
+            else print("Emails:")
+            print emails    
+            
+            if (numeros == []) 
+                then print ("Nao existem numeros associados a " ++ nome)
+            else print("Numeros:")
+            print numeros
 --4
 data Rtree a = R a [Rtree a] deriving (Show,Eq)
 --(a)
