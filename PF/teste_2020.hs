@@ -105,3 +105,5 @@ consultaIO l =
 --4
 data Rtree a = R a [Rtree a] deriving (Show,Eq)
 --(a)
+paths :: Rtree a -> [a]
+paths (R r e d) = 

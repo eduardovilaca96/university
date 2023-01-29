@@ -18,7 +18,7 @@ enumFromTo1 x y | y>=x = x : enumFromTo1 (x+1) y
 
 --Ex2
 enumFromThenTo1 :: Int -> Int -> Int ->[Int]
-enumFromThenTo1 x y z | z>=x = x : enumFromThenTo1 (x+y-1) y z
+enumFromThenTo1 x y z | z >= x = x : enumFromThenTo1 (x+y-1) y z
                 | otherwise = []
 
 --Ex3 
