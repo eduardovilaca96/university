@@ -8,6 +8,6 @@ int main() {
 
     for(k = 3; k < 20;k+=3 ){
         printf("1");
-    }// the condition to loop 6 times is k+=3
+    }// the condition to iterate 6 times is k+=3
 
 }
